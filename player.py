@@ -1,4 +1,5 @@
-from circleshape import *
+import pygame
+from circleshape import CircleShape
 from constants import *
 
 class Player(CircleShape):
@@ -35,6 +36,17 @@ class Player(CircleShape):
 
         if keys[pygame.K_s]:
             self.move(-dt)
+
+                # Wrap around screen edges
+        if self.position.x < 0:
+            self.position.x += SCREEN_WIDTH
+        elif self.position.x > SCREEN_WIDTH:
+            self.position.x -= SCREEN_WIDTH
+
+        if self.position.y < 0:
+            self.position.y += SCREEN_HEIGHT
+        elif self.position.y > SCREEN_HEIGHT:
+            self.position.y -= SCREEN_HEIGHT
 
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
